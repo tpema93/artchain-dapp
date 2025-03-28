@@ -29,7 +29,7 @@ A decentralized application (DApp) that enables secure tokenization and trading 
 npm install
 ```
 3. Start Ganache (GUI or CLI)
-•	Make sure Ganache is running on http://127.0.0.1:7545
+- Make sure Ganache is running on http://127.0.0.1:7545
 5. Compile and migrate contracts
 ```bash
 truffle compile
@@ -40,7 +40,7 @@ truffle migrate
 npm run dev
 ```
 6. Connect MetaMask to the local Ganache network
-• Import test accounts from Ganache into MetaMask to simulate transactions
+- Import test accounts from Ganache into MetaMask to simulate transactions
 
 ## Additional Features To Add
 - Add decentralized image storage using IPFS
