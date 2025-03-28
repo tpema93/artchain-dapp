@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ArtChain - Art Token</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="css/toastr.min.css" rel="stylesheet">
+  </head>  
+  <body>
+    <div class='container'>
+      <h1 class="mb-3 mt-4 text-center">ArtChain - Art Token</h1>
+      <hr>
+      <div class='row'>
+        <div class='col-lg-4 forms'>
+          <form>
+            <h3>Add an Art Piece</h3>
+            <div class="form-group">
+              <label for="art_piece_name">Art Piece Name</label>
+              <input type="text" class="form-control" id="art_piece_name" placeholder="Enter art piece name">
+            </div>
+            <div class="form-group">
+              <label for="art_piece_price">Price</label>
+              <input type="number" class="form-control" id="art_piece_price" placeholder="Enter art piece price">
+            </div>
+            <button type="button" id='add_art_piece' class="btn btn-info">Add</button>
+          </form>
+        </div>
+        <div class='col-lg-4 forms'>
+          <form>
+            <h3>Transfer Ownership</h3>
+            <div class="form-group">
+              <label for="transfer_art_piece_id">Art Piece ID</label>
+              <input type="text" class="form-control" id="transfer_art_piece_id" placeholder="Enter art piece id">
+            </div>
+            <div class="form-group">
+              <label for="new_owner_address">New Owner Address</label>
+              <input type="text" class="form-control" id="new_owner_address" placeholder="Enter new owner address">
+            </div>
+            <button type="button" id='transfer_ownership' class="btn btn-info">Transfer</button>
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div class='col-lg-12'>
+        <h3>Available Art Pieces</h3>
+        <div class="card-group" id='art_pieces'>                
+        </div>
+    </div>
+</div>
+<style>
+.container{
+  margin-left:5%;
+  margin-right: 5%;
+  padding-left: 0;
+  padding-right: 0;
+  max-width: -webkit-fill-available;
+}
+.forms {
+  margin-right:3%;
+  border-right:1px solid #bebebe;
+}
+</style>
+</body>
+    <script src="js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      // Fetch the JSON file
+      fetch('src/proposals.json')
+        .then(response => response.json())
+        .then(artPieces => {
+          // Get the art pieces container
+          const container = document.querySelector('#art_pieces');
+
+          // For each art piece...
+          artPieces.forEach(artPiece => {
+            // Create a card
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            // Add an image to the card
+            const img = document.createElement('img');
+            img.className = 'card-img-top';
+            img.src = `image/${artPiece.picture}`;
+            img.alt = artPiece.name;
+            card.appendChild(img);
+
+            // Add a card body with the art piece name
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+            const cardTitle = document.createElement('h5');
+            cardTitle.className = 'card-title';
+            cardTitle.textContent = artPiece.name;
+            cardBody.appendChild(cardTitle);
+            card.appendChild(cardBody);
+
+            // Add the card to the container
+            container.appendChild(card);
+          });
+        });
+    </script>
+  </body>
+</html>
